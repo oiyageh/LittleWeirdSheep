@@ -22,7 +22,7 @@ public class PlayerWeapon : MonoBehaviour
     System.Collections.IEnumerator SwingAction()
     {
         isSwinging = true;
-        animator.SetTrigger("Swing"); // Assuming you set up a trigger named "Swing"
+        animator.SetTrigger("Swing"); 
 
         // Wait for the duration of the animation (e.g., 0.5 seconds)
         yield return new WaitForSeconds(0.5f);
