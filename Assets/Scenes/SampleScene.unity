@@ -1289,6 +1289,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1725354383}
+    - target: {fileID: 5124303273457291984, guid: ab43b0af57183a9408591df5ce161da4, type: 3}
+      propertyPath: requireLineOfSight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124303273457291984, guid: ab43b0af57183a9408591df5ce161da4, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 6051256103249479650, guid: ab43b0af57183a9408591df5ce161da4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.62
@@ -1648,6 +1656,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1725354383}
+    - target: {fileID: 5124303273457291984, guid: ab43b0af57183a9408591df5ce161da4, type: 3}
+      propertyPath: requireLineOfSight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124303273457291984, guid: ab43b0af57183a9408591df5ce161da4, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 6051256103249479650, guid: ab43b0af57183a9408591df5ce161da4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -22.99
