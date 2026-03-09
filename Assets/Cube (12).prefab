@@ -174,19 +174,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SheepAI
   player: {fileID: 0}
   agent: {fileID: 4183697916252990808}
-  headPivot: {fileID: 0}
-  headTurnSpeed: 8
-  headMaxYaw: 60
-  headMaxPitch: 25
-  eyeHeight: 0.6
-  eyePoint: {fileID: 3099890886221273809}
   sightDistance: 10
   followDistance: 7
   loseInterestDistance: 14
   requireLineOfSight: 1
+  eyePoint: {fileID: 3099890886221273809}
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63
+  eyeHeight: 0.6
   wanderRadius: 10
   wanderSecondsMin: 2
   wanderSecondsMax: 5
@@ -198,8 +194,6 @@ MonoBehaviour:
   followSecondsMin: 1.5
   followSecondsMax: 3
   followRepathInterval: 0.25
-  followCooldownSeconds: 2.5
-  bodyTurnSpeed: 10
   currentState: 0
 --- !u!1 &2690754871725031820
 GameObject:

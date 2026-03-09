@@ -9,18 +9,28 @@ public class SheepAI : MonoBehaviour
     public Transform player;
     public NavMeshAgent agent;
 
-    [Header("Visual Aim (Head)")]
-    public Transform headPivot;                 // Drag HeadPivot here
+    [Header("Head / Eye Look")]
+    public Transform headPivot;
+    public Transform eyePoint;
+    public float eyeHeight = 0.6f;
     public float headTurnSpeed = 8f;
-    public float headMaxYaw = 60f;              // left/right clamp
-    public float headMaxPitch = 25f;            // up/down clamp
-    public float eyeHeight = 0.6f;              // if you don’t have eyePoint
-    public Transform eyePoint;                  // optional
+    public float headMaxYaw = 50f;
+    public float headMaxPitch = 20f;
+
+    [Header("Head Close-Range Fix")]
+    public float minHeadLookDistance = 1.8f;       // if player is closer than this, head stops trying to fully aim
+    public float noHeadLookDistance = 0.9f;        // if player is closer than this, head returns to default
+    public float veryCloseHeadReturnSpeed = 10f;
 
     [Header("Distances")]
     public float sightDistance = 10f;
     public float followDistance = 6f;
     public float loseInterestDistance = 14f;
+
+    [Header("Follow Personal Space")]
+    public float followStopDistance = 2.0f;        // sheep stops this far away from player
+    public float followResumeDistance = 2.6f;      // must be at least this far to continue chasing
+    public float playerTooCloseStopFollow = 1.2f;  // if closer than this, stop following immediately
 
     [Header("Line of Sight")]
     public bool requireLineOfSight = false;
@@ -36,21 +46,22 @@ public class SheepAI : MonoBehaviour
     public float idleSecondsMax = 3f;
 
     [Header("Stare")]
-    public float stareSecondsMin = 0.8f;
-    public float stareSecondsMax = 2.0f;
+    public float stareSecondsMin = 1f;
+    public float stareSecondsMax = 2.5f;
 
     [Header("Follow")]
     [Range(0f, 1f)]
-    public float followChanceWhenClose = 0.25f;
+    public float followChanceWhenClose = 0.15f;
     public float followSecondsMin = 1.5f;
-    public float followSecondsMax = 4.0f;
+    public float followSecondsMax = 3.0f;
     public float followRepathInterval = 0.25f;
+    public float followCooldownSeconds = 3f;
 
-    [Header("Anti-Spam Follow")]
-    public float followCooldownSeconds = 2.5f;   // prevents immediate re-follow
-
-    [Header("Body Facing")]
-    public float bodyTurnSpeed = 10f;            // faces movement direction
+    [Header("Body Turn")]
+    public float normalBodyTurnSpeed = 10f;
+    public float stareBodyTurnSpeed = 3f;
+    public float followBodyTurnSpeed = 6f;
+    public float bodyForwardYawOffset = 0f;
 
     [Header("Debug")]
     public State currentState = State.Wander;
@@ -83,8 +94,8 @@ public class SheepAI : MonoBehaviour
 
         if (!player)
         {
-            TickState_NoPlayer();
-            FaceMovement();         // still face movement if wandering
+            TickStateNoPlayer();
+            FaceMovement(normalBodyTurnSpeed);
             ResetHeadToDefault();
             return;
         }
@@ -94,50 +105,54 @@ public class SheepAI : MonoBehaviour
         bool canSeePlayer = dist <= sightDistance && (!requireLineOfSight || HasLineOfSightToPlayer());
         bool closeEnoughToConsiderFollow = dist <= followDistance;
 
-        // If player is far, drop special states
         if (dist > loseInterestDistance && (currentState == State.Stare || currentState == State.Follow))
         {
             EnterState(State.Wander);
         }
 
-        // Random stare trigger (when noticing player)
         if (canSeePlayer && (currentState == State.Wander || currentState == State.Idle))
         {
             if (Random.value < 0.35f)
+            {
                 EnterState(State.Stare);
+            }
         }
 
-        // Random follow trigger (only if cooldown is over)
         if (followCooldownTimer <= 0f &&
             closeEnoughToConsiderFollow &&
+            dist > followResumeDistance &&
             (currentState == State.Wander || currentState == State.Idle || currentState == State.Stare))
         {
-            // scaled by deltaTime so it’s "sometimes", not constant
-            float chancePerSecond = followChanceWhenClose * 2.5f;
+            float chancePerSecond = followChanceWhenClose * 2.0f;
             if (Random.value < chancePerSecond * Time.deltaTime)
+            {
                 EnterState(State.Follow);
+            }
         }
 
-        TickState(dist);
+        TickState();
 
-        // Rotation behavior:
-        // - During stare: body can stay put; head tracks player
-        // - Otherwise: body faces movement direction; head resets (or you can make it mild look)
-        if (currentState == State.Stare || currentState == State.Follow)
+        if (currentState == State.Stare)
         {
             AimHeadAtPlayer();
+            FaceBodyTowardPlayer(stareBodyTurnSpeed);
+        }
+        else if (currentState == State.Follow)
+        {
+            AimHeadAtPlayer();
+            FaceBodyTowardPlayer(followBodyTurnSpeed);
         }
         else
         {
             ResetHeadToDefault();
+            FaceMovement(normalBodyTurnSpeed);
         }
-
-        FaceMovement();
     }
 
-    void TickState_NoPlayer()
+    void TickStateNoPlayer()
     {
         stateTimer -= Time.deltaTime;
+
         if (stateTimer <= 0f)
         {
             if (currentState == State.Wander) EnterState(State.Idle);
@@ -145,9 +160,11 @@ public class SheepAI : MonoBehaviour
         }
     }
 
-    void TickState(float distToPlayer)
+    void TickState()
     {
         stateTimer -= Time.deltaTime;
+
+        float distToPlayer = player ? Vector3.Distance(transform.position, player.position) : Mathf.Infinity;
 
         switch (currentState)
         {
@@ -162,29 +179,51 @@ public class SheepAI : MonoBehaviour
                 break;
 
             case State.Stare:
-                agent.ResetPath(); // stop moving
+                agent.ResetPath();
+
                 if (stateTimer <= 0f)
+                {
                     EnterState(Random.value < 0.5f ? State.Idle : State.Wander);
+                }
                 break;
 
             case State.Follow:
-                // Follow only for a few seconds, then stop.
+                // Stop following if player is already too close
+                if (distToPlayer <= playerTooCloseStopFollow)
+                {
+                    agent.ResetPath();
+                    followCooldownTimer = followCooldownSeconds;
+                    EnterState(State.Idle);
+                    return;
+                }
+
                 repathTimer -= Time.deltaTime;
+
                 if (repathTimer <= 0f)
                 {
                     repathTimer = followRepathInterval;
-                    agent.SetDestination(player.position);
+
+                    // Only chase if player is still outside personal-space distance
+                    if (distToPlayer > followStopDistance)
+                    {
+                        Vector3 dir = (transform.position - player.position).normalized;
+                        Vector3 targetPos = player.position + dir * followStopDistance;
+
+                        if (NavMesh.SamplePosition(targetPos, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+                            agent.SetDestination(hit.position);
+                        else
+                            agent.SetDestination(player.position);
+                    }
+                    else
+                    {
+                        agent.ResetPath();
+                    }
                 }
 
                 if (stateTimer <= 0f)
                 {
-                    // STOP following (important)
                     agent.ResetPath();
-
-                    // cooldown so it won’t instantly follow again
                     followCooldownTimer = followCooldownSeconds;
-
-                    // go back to normal life
                     EnterState(Random.value < 0.6f ? State.Wander : State.Idle);
                 }
                 break;
@@ -200,6 +239,7 @@ public class SheepAI : MonoBehaviour
             case State.Wander:
                 stateTimer = Random.Range(wanderSecondsMin, wanderSecondsMax);
                 agent.isStopped = false;
+                agent.stoppingDistance = 0f;
                 SetRandomWanderDestination();
                 break;
 
@@ -217,6 +257,7 @@ public class SheepAI : MonoBehaviour
                 stateTimer = Random.Range(followSecondsMin, followSecondsMax);
                 repathTimer = 0f;
                 agent.isStopped = false;
+                agent.stoppingDistance = followStopDistance;
                 break;
         }
     }
@@ -228,49 +269,98 @@ public class SheepAI : MonoBehaviour
         Vector3 candidate = new Vector3(origin.x + r.x, origin.y, origin.z + r.y);
 
         if (NavMesh.SamplePosition(candidate, out NavMeshHit hit, 2.5f, NavMesh.AllAreas))
+        {
             agent.SetDestination(hit.position);
+        }
     }
 
-    // --- BODY FACING FIX (moves where it's pointing) ---
-    void FaceMovement()
+    void FaceMovement(float turnSpeed)
     {
-        // If not moving, don’t rotate body.
-        Vector3 vel = agent.velocity;
-        vel.y = 0f;
-        if (vel.sqrMagnitude < 0.02f) return;
+        Vector3 v = agent.desiredVelocity;
+        v.y = 0f;
 
-        // Face the direction you're actually moving
-        Quaternion targetRot = Quaternion.LookRotation(vel.normalized);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * bodyTurnSpeed);
+        if (v.sqrMagnitude < 0.001f) return;
+
+        Quaternion target = Quaternion.LookRotation(v.normalized);
+        target *= Quaternion.Euler(0f, bodyForwardYawOffset, 0f);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * turnSpeed);
     }
 
-    // --- HEAD/ EYELINE FIX ---
+    void FaceBodyTowardPlayer(float turnSpeed)
+    {
+        if (!player) return;
+
+        Vector3 dir = player.position - transform.position;
+        dir.y = 0f;
+
+        if (dir.sqrMagnitude < 0.001f) return;
+
+        Quaternion targetRot = Quaternion.LookRotation(dir.normalized);
+        targetRot *= Quaternion.Euler(0f, bodyForwardYawOffset, 0f);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * turnSpeed);
+    }
+
     void AimHeadAtPlayer()
     {
         if (!headPivot || !player) return;
 
         Vector3 from = headPivot.position;
         Vector3 to = player.position + Vector3.up * 0.8f;
-        Vector3 dir = (to - from).normalized;
 
-        // Convert world direction into local space of the sheep root
+        float dist = Vector3.Distance(transform.position, player.position);
+
+        // Extremely close: just return to default head pose
+        if (dist <= noHeadLookDistance)
+        {
+            headPivot.localRotation = Quaternion.Slerp(
+                headPivot.localRotation,
+                headLocalDefaultRot,
+                Time.deltaTime * veryCloseHeadReturnSpeed
+            );
+            return;
+        }
+
+        Quaternion targetLocal = GetHeadLookRotation(from, to);
+
+        // Somewhat close: blend between default and look rotation
+        if (dist < minHeadLookDistance)
+        {
+            float t = Mathf.InverseLerp(noHeadLookDistance, minHeadLookDistance, dist);
+            targetLocal = Quaternion.Slerp(headLocalDefaultRot, targetLocal, t);
+        }
+
+        headPivot.localRotation = Quaternion.Slerp(
+            headPivot.localRotation,
+            targetLocal,
+            Time.deltaTime * headTurnSpeed
+        );
+    }
+
+    Quaternion GetHeadLookRotation(Vector3 from, Vector3 to)
+    {
+        Vector3 dir = (to - from).normalized;
         Vector3 localDir = transform.InverseTransformDirection(dir);
 
-        // yaw (left/right) and pitch (up/down)
         float yaw = Mathf.Atan2(localDir.x, localDir.z) * Mathf.Rad2Deg;
         float pitch = -Mathf.Asin(localDir.y) * Mathf.Rad2Deg;
 
         yaw = Mathf.Clamp(yaw, -headMaxYaw, headMaxYaw);
         pitch = Mathf.Clamp(pitch, -headMaxPitch, headMaxPitch);
 
-        Quaternion targetLocal = Quaternion.Euler(pitch, yaw, 0f);
-        headPivot.localRotation = Quaternion.Slerp(headPivot.localRotation, targetLocal, Time.deltaTime * headTurnSpeed);
+        return Quaternion.Euler(pitch, yaw, 0f);
     }
 
     void ResetHeadToDefault()
     {
         if (!headPivot) return;
-        headPivot.localRotation = Quaternion.Slerp(headPivot.localRotation, headLocalDefaultRot, Time.deltaTime * headTurnSpeed);
+
+        headPivot.localRotation = Quaternion.Slerp(
+            headPivot.localRotation,
+            headLocalDefaultRot,
+            Time.deltaTime * headTurnSpeed
+        );
     }
 
     bool HasLineOfSightToPlayer()
@@ -284,6 +374,7 @@ public class SheepAI : MonoBehaviour
         {
             return hit.transform == player || hit.transform.IsChildOf(player);
         }
+
         return true;
     }
 }
