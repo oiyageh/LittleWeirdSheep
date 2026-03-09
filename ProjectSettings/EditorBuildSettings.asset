@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/MainGameThings/PlayerTest Scene.unity
     guid: 2b331c36b2b69e4419455436fc7ac9c6
   - enabled: 1
+    path: Assets/MainGameThings/MainGame.unity
+    guid: 44e1b046f8896d946ac6e28f6b0492a3
+  - enabled: 1
     path: Assets/MainGameThings/MainMenu.unity
     guid: e90aa10ca5d760e4a84da185335fd84d
   - enabled: 1
