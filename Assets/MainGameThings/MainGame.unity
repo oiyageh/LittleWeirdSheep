@@ -314,6 +314,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Paintable
       objectReference: {fileID: 0}
+    - target: {fileID: 5076545921213394739, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_Name
       value: BadSheepAi done (1)
@@ -321,6 +325,10 @@ PrefabInstance:
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_TagString
       value: Paintable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926494086308793743, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5967430332293668859, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: player
@@ -1209,6 +1217,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2824452358560064011, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.1
@@ -3749,6 +3761,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2824452358560064011, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.13
@@ -7268,6 +7284,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2824452358560064011, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.13
@@ -13890,6 +13910,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Paintable
       objectReference: {fileID: 0}
+    - target: {fileID: 5076545921213394739, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_Name
       value: BadSheepAi done (4)
@@ -13897,6 +13921,10 @@ PrefabInstance:
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_TagString
       value: Paintable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926494086308793743, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5967430332293668859, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: player
@@ -14649,6 +14677,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2824452358560064011, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.33
@@ -16245,6 +16277,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2824452358560064011, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.13
@@ -18193,6 +18229,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Paintable
       objectReference: {fileID: 0}
+    - target: {fileID: 5076545921213394739, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_Name
       value: BadSheepAi done (6)
@@ -18200,6 +18240,10 @@ PrefabInstance:
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_TagString
       value: Paintable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926494086308793743, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 5967430332293668859, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: player
@@ -19936,6 +19980,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2824452358560064011, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.3
@@ -24226,6 +24274,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2824452358560064011, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.1
@@ -25942,6 +25994,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Paintable
       objectReference: {fileID: 0}
+    - target: {fileID: 5076545921213394739, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_Name
       value: BadSheepAi done (3)
@@ -25949,6 +26005,10 @@ PrefabInstance:
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_TagString
       value: Paintable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926494086308793743, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 5967430332293668859, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: player
@@ -26585,6 +26645,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Paintable
       objectReference: {fileID: 0}
+    - target: {fileID: 5076545921213394739, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_Name
       value: BadSheepAi done (2)
@@ -26592,6 +26656,10 @@ PrefabInstance:
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_TagString
       value: Paintable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926494086308793743, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5967430332293668859, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: player
@@ -29660,6 +29728,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2824452358560064011, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.24
@@ -34303,6 +34375,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Paintable
       objectReference: {fileID: 0}
+    - target: {fileID: 5076545921213394739, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_Name
       value: BadSheepAi done (5)
@@ -34310,6 +34386,10 @@ PrefabInstance:
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_TagString
       value: Paintable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926494086308793743, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5967430332293668859, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: player
@@ -37559,6 +37639,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2824452358560064011, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 31
+      objectReference: {fileID: 0}
     - target: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.04
@@ -38555,6 +38639,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Paintable
       objectReference: {fileID: 0}
+    - target: {fileID: 5076545921213394739, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_Name
       value: BadSheepAi done
@@ -38562,6 +38650,10 @@ PrefabInstance:
     - target: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: m_TagString
       value: Paintable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926494086308793743, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5967430332293668859, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
       propertyPath: player
@@ -40042,6 +40134,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2824452358560064011, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      propertyPath: delayBetweenPlays
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.42
