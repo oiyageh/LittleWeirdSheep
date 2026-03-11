@@ -5,17 +5,10 @@ public class BadSheepAI : MonoBehaviour
 {
     public enum State
     {
-        Wander,
-        Idle,
-        Stare,
-        Follow,
-
-        WeirdDance,
-        WeirdCrawl,
-        WeirdFreezeLook,
-        WeirdSpinRun,
-
-        Attack,
+        Wander, Idle, Stare, Follow,
+        StandUp,
+        WeirdFemaleDance, WeirdHeadSpin, WeirdHipHop, WeirdRunningCrawl, WeirdQuickSteps,
+        SprintChase, AttackSwipe, GoDown,
         Escape
     }
 
@@ -24,15 +17,19 @@ public class BadSheepAI : MonoBehaviour
     public NavMeshAgent agent;
     public Transform headPivot;
     public Transform eyePoint;
-    public Transform visualRoot;
+
+    [Header("Model Swap References")]
+    public GameObject normalModel;
+    public GameObject mutantModel;
+    public Animator normalAnim;
+    public Animator mutantAnim;
+    private Animator currentAnim;
 
     [Header("Head / Eye Look")]
     public float eyeHeight = 0.6f;
     public float headTurnSpeed = 8f;
     public float headMaxYaw = 50f;
     public float headMaxPitch = 20f;
-
-    [Header("Head Close-Range Fix")]
     public float minHeadLookDistance = 1.8f;
     public float noHeadLookDistance = 0.9f;
     public float veryCloseHeadReturnSpeed = 10f;
@@ -41,8 +38,6 @@ public class BadSheepAI : MonoBehaviour
     public float sightDistance = 10f;
     public float followDistance = 6f;
     public float loseInterestDistance = 14f;
-
-    [Header("Follow Personal Space")]
     public float followStopDistance = 2.0f;
     public float followResumeDistance = 2.6f;
     public float playerTooCloseStopFollow = 1.2f;
@@ -51,20 +46,16 @@ public class BadSheepAI : MonoBehaviour
     public bool requireLineOfSight = false;
     public LayerMask obstacleMask = ~0;
 
-    [Header("Wander")]
+    [Header("Normal Behavior Timers")]
     public float wanderRadius = 10f;
     public float wanderSecondsMin = 2f;
     public float wanderSecondsMax = 5f;
-
-    [Header("Idle")]
     public float idleSecondsMin = 1f;
     public float idleSecondsMax = 3f;
-
-    [Header("Stare")]
     public float stareSecondsMin = 1f;
     public float stareSecondsMax = 2.5f;
 
-    [Header("Follow")]
+    [Header("Follow Settings")]
     [Range(0f, 1f)]
     public float followChanceWhenClose = 0.15f;
     public float followSecondsMin = 1.5f;
@@ -72,54 +63,40 @@ public class BadSheepAI : MonoBehaviour
     public float followRepathInterval = 0.25f;
     public float followCooldownSeconds = 3f;
 
-    [Header("Body Turn")]
+    [Header("Body Turns")]
     public float normalBodyTurnSpeed = 10f;
     public float stareBodyTurnSpeed = 3f;
     public float followBodyTurnSpeed = 6f;
-    public float attackBodyTurnSpeed = 10f;
     public float bodyForwardYawOffset = 0f;
 
-    [Header("Triggered Logic")]
+    [Header("Triggered Setup & Animation Timings")]
     public bool isTriggered = false;
-    public float triggerAttackDistance = 8f; // "x distance" for triggering attack
+    public float triggerAttackDistance = 8f;
+    public float standUpDuration = 1.5f;
+    public float goDownDuration = 1.0f;
+    public float weirdBurstDuration = 3f;
 
-    [Header("Weird State")]
-    public float weirdBurstDuration = 0.75f; // "x seconds" of weird state before escape
-    public float weirdMoveRadius = 8f;
-
-    [Header("Attack")]
-    public float attackDuration = 3f; // Increased so it has time to chase the player
+    [Header("Attack Settings")]
+    public float attackDuration = 4f;
+    public float attackHitDistance = 1.5f;
     public float stunDuration = 0.5f;
-    public float attackHitDistance = 1.5f; // Must get this close to trigger stun
-    public float attackSpeedMultiplier = 1.5f; // Little speed boost to catch the player
+    public float attackSwipeAnimDuration = 1.5f;
+    public float bipedSprintSpeed = 4.5f;
 
-    [Header("Escape")]
+    [Header("Escape Settings")]
     public float escapeDuration = 4f;
     public float escapeDistance = 20f;
     public float escapeSpeedMultiplier = 2.5f;
     public float escapeTurnSpeed = 12f;
     public float escapeSampleRadius = 10f;
 
-    [Header("Weird State Visuals")]
-    public float danceSpinSpeed = 200f;
-    public float danceBobHeight = 0.3f;
-    public float danceBobSpeed = 4f;
-    public float crawlHeightOffset = -0.3f;
-    public float spinRunSpinSpeed = 500f;
-
-    [Header("Debug")]
     public State currentState = State.Wander;
-
     float stateTimer;
     float repathTimer;
     float followCooldownTimer;
-
-    Quaternion headLocalDefaultRot;
-    Vector3 visualDefaultPos;
-    Quaternion visualDefaultRot;
     float defaultAgentSpeed;
-
-    bool attackTriggeredThisState = false;
+    bool intendToAttackAfterStandUp = false;
+    Quaternion headLocalDefaultRot;
 
     void Awake()
     {
@@ -130,22 +107,18 @@ public class BadSheepAI : MonoBehaviour
             GameObject p = GameObject.FindGameObjectWithTag("Player");
             if (p) player = p.transform;
         }
-
-        if (headPivot)
-            headLocalDefaultRot = headPivot.localRotation;
-
-        if (visualRoot)
-        {
-            visualDefaultPos = visualRoot.localPosition;
-            visualDefaultRot = visualRoot.localRotation;
-        }
+        if (headPivot) headLocalDefaultRot = headPivot.localRotation;
 
         defaultAgentSpeed = agent.speed;
+
+        SwapToNormalModel();
         EnterState(State.Wander);
     }
 
     void Update()
     {
+        if (currentAnim) currentAnim.SetFloat("Speed", agent.velocity.magnitude);
+
         if (!isTriggered)
             UpdateNormalSheep();
         else
@@ -155,32 +128,31 @@ public class BadSheepAI : MonoBehaviour
     public void TriggerBadSheep()
     {
         if (isTriggered) return;
-        if (!player) return;
-
         isTriggered = true;
 
         float dist = Vector3.Distance(transform.position, player.position);
+        intendToAttackAfterStandUp = (dist <= triggerAttackDistance);
 
-        if (dist <= triggerAttackDistance)
-        {
-            // BRANCH 2: Player triggers sheep within X distance -> Attack (Chase) -> Stun -> Escape
-            EnterState(State.Attack);
-        }
-        else
-        {
-            // BRANCH 1 & 3: Player triggers sheep out of X distance -> Weird State
-            EnterRandomWeirdState();
-        }
+        EnterState(State.StandUp);
     }
 
-    // ==================================================
-    // NORMAL SHEEP LOGIC
-    // ==================================================
+    void SwapToNormalModel()
+    {
+        if (mutantModel) mutantModel.SetActive(false);
+        if (normalModel) normalModel.SetActive(true);
+        currentAnim = normalAnim;
+    }
+
+    void SwapToMutantModel()
+    {
+        if (normalModel) normalModel.SetActive(false);
+        if (mutantModel) mutantModel.SetActive(true);
+        currentAnim = mutantAnim;
+    }
+
     void UpdateNormalSheep()
     {
-        RestoreVisual();
         followCooldownTimer -= Time.deltaTime;
-
         if (!player)
         {
             TickStateNoPlayer();
@@ -190,28 +162,20 @@ public class BadSheepAI : MonoBehaviour
         }
 
         float dist = Vector3.Distance(transform.position, player.position);
-
         bool canSeePlayer = dist <= sightDistance && (!requireLineOfSight || HasLineOfSightToPlayer());
-        bool closeEnoughToConsiderFollow = dist <= followDistance;
 
         if (dist > loseInterestDistance && (currentState == State.Stare || currentState == State.Follow))
-        {
             EnterState(State.Wander);
-        }
 
         if (canSeePlayer && (currentState == State.Wander || currentState == State.Idle))
         {
-            if (Random.value < 0.35f)
-                EnterState(State.Stare);
+            if (Random.value < 0.35f) EnterState(State.Stare);
         }
 
-        if (followCooldownTimer <= 0f &&
-            closeEnoughToConsiderFollow &&
-            dist > followResumeDistance &&
+        if (followCooldownTimer <= 0f && dist <= followDistance && dist > followResumeDistance &&
             (currentState == State.Wander || currentState == State.Idle || currentState == State.Stare))
         {
-            float chancePerSecond = followChanceWhenClose * 2.0f;
-            if (Random.value < chancePerSecond * Time.deltaTime)
+            if (Random.value < (followChanceWhenClose * 2.0f) * Time.deltaTime)
                 EnterState(State.Follow);
         }
 
@@ -237,12 +201,7 @@ public class BadSheepAI : MonoBehaviour
     void TickStateNoPlayer()
     {
         stateTimer -= Time.deltaTime;
-
-        if (stateTimer <= 0f)
-        {
-            if (currentState == State.Wander) EnterState(State.Idle);
-            else EnterState(State.Wander);
-        }
+        if (stateTimer <= 0f) EnterState(currentState == State.Wander ? State.Idle : State.Wander);
     }
 
     void TickNormalState()
@@ -253,56 +212,28 @@ public class BadSheepAI : MonoBehaviour
         switch (currentState)
         {
             case State.Wander:
-                if (stateTimer <= 0f)
-                    EnterState(State.Idle);
-                break;
-
             case State.Idle:
-                if (stateTimer <= 0f)
-                    EnterState(State.Wander);
+                if (stateTimer <= 0f) EnterState(currentState == State.Wander ? State.Idle : State.Wander);
                 break;
-
             case State.Stare:
-                agent.ResetPath();
-
-                if (stateTimer <= 0f)
-                    EnterState(Random.value < 0.5f ? State.Idle : State.Wander);
+                if (stateTimer <= 0f) EnterState(Random.value < 0.5f ? State.Idle : State.Wander);
                 break;
-
             case State.Follow:
                 if (distToPlayer <= playerTooCloseStopFollow)
                 {
-                    agent.ResetPath();
                     followCooldownTimer = followCooldownSeconds;
                     EnterState(State.Idle);
                     return;
                 }
-
                 repathTimer -= Time.deltaTime;
-
                 if (repathTimer <= 0f)
                 {
                     repathTimer = followRepathInterval;
-
-                    if (distToPlayer > followStopDistance)
-                    {
-                        Vector3 dir = (transform.position - player.position).normalized;
-                        Vector3 targetPos = player.position + dir * followStopDistance;
-
-                        if (NavMesh.SamplePosition(targetPos, out NavMeshHit hit, 2f, NavMesh.AllAreas))
-                            agent.SetDestination(hit.position);
-                        else
-                            agent.SetDestination(player.position);
-                    }
-                    else
-                    {
-                        agent.ResetPath();
-                    }
+                    if (distToPlayer > followStopDistance) agent.SetDestination(player.position);
+                    else agent.ResetPath();
                 }
-
                 if (stateTimer <= 0f)
                 {
-                    agent.ResetPath();
                     followCooldownTimer = followCooldownSeconds;
                     EnterState(Random.value < 0.6f ? State.Wander : State.Idle);
                 }
@@ -310,447 +241,213 @@ public class BadSheepAI : MonoBehaviour
         }
     }
 
-    // ==================================================
-    // TRIGGERED LOGIC
-    // ==================================================
     void UpdateTriggeredSheep()
     {
-        // BRANCH 3: Interrupt weird state if player enters X distance
-        if (IsWeirdState(currentState) && player != null)
-        {
-            float dist = Vector3.Distance(transform.position, player.position);
-            if (dist <= triggerAttackDistance)
-            {
-                EnterState(State.Attack);
-                return;
-            }
-        }
-
         stateTimer -= Time.deltaTime;
+        float dist = player ? Vector3.Distance(transform.position, player.position) : 99f;
+
+        ResetHeadToDefault();
 
         switch (currentState)
         {
-            case State.WeirdDance:
-                DoWeirdDance();
-                break;
-
-            case State.WeirdCrawl:
-                DoWeirdCrawl();
-                break;
-
-            case State.WeirdFreezeLook:
-                DoWeirdFreezeLook();
-                break;
-
-            case State.WeirdSpinRun:
-                DoWeirdSpinRun();
-                break;
-
-            case State.Attack:
-                DoAttack();
-                // Immediately escape after stun is triggered
-                if (attackTriggeredThisState)
+            case State.StandUp:
+                if (stateTimer <= 0f)
                 {
-                    EnterState(State.Escape);
+                    if (intendToAttackAfterStandUp) EnterState(State.SprintChase);
+                    else EnterRandomWeirdState();
                 }
                 break;
-
-            case State.Escape:
-                DoEscape();
+            case State.WeirdFemaleDance:
+            case State.WeirdHeadSpin:
+            case State.WeirdHipHop:
+            case State.WeirdRunningCrawl:
+            case State.WeirdQuickSteps:
+                if (dist <= triggerAttackDistance)
+                {
+                    EnterState(State.SprintChase);
+                    return;
+                }
+                if (stateTimer <= 0f) EnterState(State.GoDown);
                 break;
-        }
+            case State.SprintChase:
+                FaceMovement(normalBodyTurnSpeed * 2f);
+                if (player) agent.SetDestination(player.position);
 
-        // Timer transitions
-        if (stateTimer <= 0f)
-        {
-            switch (currentState)
-            {
-                case State.WeirdDance:
-                case State.WeirdCrawl:
-                case State.WeirdFreezeLook:
-                case State.WeirdSpinRun:
-                    // BRANCH 1: Weird state ends, sheep escapes
-                    EnterState(State.Escape);
-                    break;
-
-                case State.Attack:
-                    // If the sheep chases for the whole duration and can't catch the player, it gives up and escapes
-                    EnterState(State.Escape);
-                    break;
-
-                case State.Escape:
+                if (dist <= attackHitDistance)
+                    EnterState(State.AttackSwipe);
+                else if (stateTimer <= 0f)
+                    EnterState(State.GoDown);
+                break;
+            case State.AttackSwipe:
+                FaceBodyTowardPlayer(normalBodyTurnSpeed);
+                if (stateTimer <= 0f) EnterState(State.GoDown);
+                break;
+            case State.GoDown:
+                if (stateTimer <= 0f) EnterState(State.Escape);
+                break;
+            case State.Escape:
+                FaceMovement(escapeTurnSpeed);
+                if (!agent.hasPath || agent.remainingDistance <= 0.3f) SetEscapeDestination();
+                if (stateTimer <= 0f)
+                {
                     isTriggered = false;
                     EnterState(State.Idle);
-                    break;
-            }
+                }
+                break;
         }
-    }
-
-    bool IsWeirdState(State s)
-    {
-        return s == State.WeirdDance ||
-               s == State.WeirdCrawl ||
-               s == State.WeirdFreezeLook ||
-               s == State.WeirdSpinRun;
     }
 
     void EnterRandomWeirdState()
     {
-        int r = Random.Range(0, 4);
-
-        if (r == 0) EnterState(State.WeirdDance);
-        else if (r == 1) EnterState(State.WeirdCrawl);
-        else if (r == 2) EnterState(State.WeirdFreezeLook);
-        else EnterState(State.WeirdSpinRun);
+        State[] weirdStates = { State.WeirdFemaleDance, State.WeirdHeadSpin, State.WeirdHipHop, State.WeirdRunningCrawl, State.WeirdQuickSteps };
+        EnterState(weirdStates[Random.Range(0, weirdStates.Length)]);
     }
 
-    // ==================================================
-    // BAD STATES
-    // ==================================================
-    void DoAttack()
-    {
-        if (!player) return;
-
-        // Actively move towards the player
-        agent.SetDestination(player.position);
-
-        AimHeadAtPlayer();
-        FaceBodyTowardPlayer(attackBodyTurnSpeed);
-
-        float dist = Vector3.Distance(transform.position, player.position);
-
-        // Only trigger stun if we physically reach the player
-        if (dist <= attackHitDistance && !attackTriggeredThisState)
-        {
-            TriggerPlayerStun();
-            attackTriggeredThisState = true;
-        }
-
-        if (visualRoot && !attackTriggeredThisState)
-        {
-            // Optional: Keeps the visual lunge running while it chases
-            float t = 1f - (stateTimer / Mathf.Max(attackDuration, 0.01f));
-            float lunge = Mathf.Sin(t * Mathf.PI * 4f) * 0.15f;
-            visualRoot.localPosition = visualDefaultPos + new Vector3(0f, 0f, lunge);
-        }
-    }
-
-    void DoEscape()
-    {
-        RestoreVisual();
-        ResetHeadToDefault();
-
-        if (!agent.hasPath || agent.remainingDistance <= 0.3f)
-        {
-            SetEscapeDestination();
-        }
-
-        agent.isStopped = false;
-        agent.speed = defaultAgentSpeed * escapeSpeedMultiplier;
-        FaceMovement(escapeTurnSpeed);
-    }
-
-    void DoWeirdDance()
-    {
-        agent.ResetPath();
-
-        if (visualRoot)
-        {
-            float bob = Mathf.Sin(Time.time * danceBobSpeed) * danceBobHeight;
-            visualRoot.localPosition = visualDefaultPos + new Vector3(0f, bob, 0f);
-            visualRoot.Rotate(Vector3.up, danceSpinSpeed * Time.deltaTime, Space.Self);
-        }
-    }
-
-    void DoWeirdCrawl()
-    {
-        agent.ResetPath();
-
-        if (visualRoot)
-        {
-            visualRoot.localPosition = Vector3.Lerp(
-                visualRoot.localPosition,
-                visualDefaultPos + new Vector3(0f, crawlHeightOffset, 0f),
-                Time.deltaTime * 8f
-            );
-        }
-    }
-
-    void DoWeirdFreezeLook()
-    {
-        agent.ResetPath();
-    }
-
-    void DoWeirdSpinRun()
-    {
-        agent.ResetPath();
-
-        if (visualRoot)
-        {
-            visualRoot.Rotate(Vector3.up, spinRunSpinSpeed * Time.deltaTime, Space.Self);
-        }
-    }
-
-    // ==================================================
-    // STATE ENTRY
-    // ==================================================
     void EnterState(State next)
     {
         currentState = next;
-        attackTriggeredThisState = false;
 
         switch (currentState)
         {
-            case State.Wander:
-                RestoreVisual(true);
-                stateTimer = Random.Range(wanderSecondsMin, wanderSecondsMax);
-                agent.isStopped = false;
-                agent.speed = defaultAgentSpeed;
-                agent.stoppingDistance = 0f;
-                SetRandomWanderDestination();
-                break;
-
             case State.Idle:
-                RestoreVisual(true);
-                stateTimer = Random.Range(idleSecondsMin, idleSecondsMax);
-                agent.isStopped = false;
-                agent.ResetPath();
-                break;
-
             case State.Stare:
-                RestoreVisual(false);
-                stateTimer = Random.Range(stareSecondsMin, stareSecondsMax);
-                agent.isStopped = false;
-                agent.ResetPath();
-                break;
-
-            case State.Follow:
-                RestoreVisual(false);
-                stateTimer = Random.Range(followSecondsMin, followSecondsMax);
-                repathTimer = 0f;
-                agent.isStopped = false;
-                agent.stoppingDistance = followStopDistance;
-                break;
-
-            case State.WeirdDance:
-            case State.WeirdCrawl:
-            case State.WeirdFreezeLook:
-            case State.WeirdSpinRun:
-                stateTimer = weirdBurstDuration;
+                SwapToNormalModel();
                 agent.isStopped = false;
                 agent.speed = defaultAgentSpeed;
-                agent.stoppingDistance = 0f;
-                agent.ResetPath();
+                if (currentState == State.Idle) { stateTimer = Random.Range(idleSecondsMin, idleSecondsMax); agent.ResetPath(); }
+                if (currentState == State.Stare) { stateTimer = Random.Range(stareSecondsMin, stareSecondsMax); agent.ResetPath(); }
+                if (currentAnim) currentAnim.CrossFade("Locomotion", 0.2f); // RESTORED
                 break;
 
-            case State.Attack:
-                stateTimer = attackDuration; // Gives sheep time to chase
+            case State.Wander:
+            case State.Follow:
+                SwapToNormalModel();
                 agent.isStopped = false;
-                agent.speed = defaultAgentSpeed * attackSpeedMultiplier; // Run to catch player
-                agent.stoppingDistance = 0f;
-                // Don't reset path here, it gets set in DoAttack() continuously
+                agent.speed = defaultAgentSpeed;
+                if (currentState == State.Wander) { stateTimer = Random.Range(wanderSecondsMin, wanderSecondsMax); SetRandomWanderDestination(); }
+                if (currentState == State.Follow) { stateTimer = Random.Range(followSecondsMin, followSecondsMax); repathTimer = 0f; }
+                if (currentAnim) currentAnim.CrossFade("Locomotion", 0.2f); // RESTORED
+                break;
+
+            case State.StandUp:
+                SwapToNormalModel();
+                agent.ResetPath();
+                agent.isStopped = true;
+                stateTimer = standUpDuration;
+                if (currentAnim) currentAnim.CrossFade("Stand Up", 0.15f);
+                break;
+
+            case State.SprintChase:
+                SwapToMutantModel();
+                agent.isStopped = false;
+                agent.speed = bipedSprintSpeed;
+                stateTimer = attackDuration;
+                if (currentAnim) currentAnim.CrossFade("Sprint", 0.2f);
+                break;
+
+            case State.AttackSwipe:
+                SwapToMutantModel();
+                agent.ResetPath();
+                agent.isStopped = true;
+                stateTimer = attackSwipeAnimDuration;
+                TriggerPlayerStun();
+                if (currentAnim) currentAnim.CrossFade("Mutant Swipe", 0.1f);
+                break;
+
+            case State.WeirdFemaleDance: SwapToMutantModel(); agent.isStopped = true; stateTimer = weirdBurstDuration; if (currentAnim) currentAnim.CrossFade("Female Dance Pose", 0.2f); break;
+            case State.WeirdHeadSpin: SwapToMutantModel(); agent.isStopped = true; stateTimer = weirdBurstDuration; if (currentAnim) currentAnim.CrossFade("Head Spinning", 0.2f); break;
+            case State.WeirdHipHop: SwapToMutantModel(); agent.isStopped = true; stateTimer = weirdBurstDuration; if (currentAnim) currentAnim.CrossFade("Hip Hop Dancing", 0.2f); break;
+            case State.WeirdRunningCrawl: SwapToMutantModel(); agent.isStopped = true; stateTimer = weirdBurstDuration; if (currentAnim) currentAnim.CrossFade("Running Crawl", 0.2f); break;
+            case State.WeirdQuickSteps: SwapToMutantModel(); agent.isStopped = true; stateTimer = weirdBurstDuration; if (currentAnim) currentAnim.CrossFade("Quick Steps", 0.2f); break;
+
+            case State.GoDown:
+                SwapToNormalModel();
+                agent.ResetPath();
+                agent.isStopped = true;
+                stateTimer = goDownDuration;
+                if (currentAnim) currentAnim.CrossFade("Go Down", 0.15f);
                 break;
 
             case State.Escape:
-                RestoreVisual(false);
-                stateTimer = escapeDuration;
+                SwapToNormalModel();
                 agent.isStopped = false;
                 agent.speed = defaultAgentSpeed * escapeSpeedMultiplier;
-                agent.stoppingDistance = 0f;
-                SetEscapeDestination(); // immediate escape target
+                stateTimer = escapeDuration;
+                SetEscapeDestination();
+                if (currentAnim) currentAnim.CrossFade("Locomotion", 0.2f); // RESTORED
                 break;
         }
     }
 
-    // ==================================================
-    // HELPERS
-    // ==================================================
     void TriggerPlayerStun()
     {
         if (!player) return;
-
-        float dist = Vector3.Distance(transform.position, player.position);
-        if (dist > attackHitDistance) return;
 
         SimplePlayerStun stun = player.GetComponent<SimplePlayerStun>();
         if (stun != null)
         {
             stun.ApplyStun(stunDuration);
+            Debug.Log("Player Stunned!");
         }
     }
 
     void SetEscapeDestination()
     {
-        Vector3 dir;
-
-        if (player)
-        {
-            dir = transform.position - player.position;
-            dir.y = 0f;
-
-            if (dir.sqrMagnitude < 0.01f)
-            {
-                dir = Random.insideUnitSphere;
-                dir.y = 0f;
-            }
-        }
-        else
-        {
-            dir = transform.forward;
-        }
-
-        dir = dir.normalized;
-        dir += new Vector3(Random.Range(-0.35f, 0.35f), 0f, Random.Range(-0.35f, 0.35f));
-        dir.Normalize();
-
-        Vector3 rawTarget = transform.position + dir * escapeDistance;
-
+        Vector3 dir = player ? transform.position - player.position : transform.forward;
+        dir.y = 0f;
+        dir = dir.normalized + new Vector3(Random.Range(-0.35f, 0.35f), 0f, Random.Range(-0.35f, 0.35f));
+        Vector3 rawTarget = transform.position + dir.normalized * escapeDistance;
         if (NavMesh.SamplePosition(rawTarget, out NavMeshHit hit, escapeSampleRadius, NavMesh.AllAreas))
-        {
             agent.SetDestination(hit.position);
-        }
-        else
-        {
-            // fallback: short hop somewhere valid
-            Vector3 fallback = transform.position + dir * 5f;
-            if (NavMesh.SamplePosition(fallback, out NavMeshHit hit2, escapeSampleRadius, NavMesh.AllAreas))
-            {
-                agent.SetDestination(hit2.position);
-            }
-        }
     }
 
     void SetRandomWanderDestination()
     {
-        Vector3 origin = transform.position;
         Vector2 r = Random.insideUnitCircle * wanderRadius;
-        Vector3 candidate = new Vector3(origin.x + r.x, origin.y, origin.z + r.y);
-
-        if (NavMesh.SamplePosition(candidate, out NavMeshHit hit, 2.5f, NavMesh.AllAreas))
-            agent.SetDestination(hit.position);
+        Vector3 candidate = transform.position + new Vector3(r.x, 0, r.y);
+        if (NavMesh.SamplePosition(candidate, out NavMeshHit hit, 2.5f, NavMesh.AllAreas)) agent.SetDestination(hit.position);
     }
 
-    void FaceMovement(float turnSpeed)
+    void FaceMovement(float turnSpd)
     {
-        Vector3 v = agent.desiredVelocity;
-        v.y = 0f;
-
+        Vector3 v = agent.desiredVelocity; v.y = 0f;
         if (v.sqrMagnitude < 0.001f) return;
-
-        Quaternion target = Quaternion.LookRotation(v.normalized);
-        target *= Quaternion.Euler(0f, bodyForwardYawOffset, 0f);
-
-        transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * turnSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(v.normalized) * Quaternion.Euler(0, bodyForwardYawOffset, 0), Time.deltaTime * turnSpd);
     }
 
-    void FaceBodyTowardPlayer(float turnSpeed)
+    void FaceBodyTowardPlayer(float turnSpd)
     {
         if (!player) return;
-
-        Vector3 dir = player.position - transform.position;
-        dir.y = 0f;
-
+        Vector3 dir = player.position - transform.position; dir.y = 0f;
         if (dir.sqrMagnitude < 0.001f) return;
-
-        Quaternion targetRot = Quaternion.LookRotation(dir.normalized);
-        targetRot *= Quaternion.Euler(0f, bodyForwardYawOffset, 0f);
-
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * turnSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir.normalized) * Quaternion.Euler(0, bodyForwardYawOffset, 0), Time.deltaTime * turnSpd);
     }
 
     void AimHeadAtPlayer()
     {
         if (!headPivot || !player) return;
-
-        Vector3 from = headPivot.position;
-        Vector3 to = player.position + Vector3.up * 0.8f;
-
         float dist = Vector3.Distance(transform.position, player.position);
+        if (dist <= noHeadLookDistance) { ResetHeadToDefault(); return; }
+        Vector3 localDir = transform.InverseTransformDirection((player.position + Vector3.up * 0.8f - headPivot.position).normalized);
+        float yaw = Mathf.Clamp(Mathf.Atan2(localDir.x, localDir.z) * Mathf.Rad2Deg, -headMaxYaw, headMaxYaw);
+        float pitch = Mathf.Clamp(-Mathf.Asin(localDir.y) * Mathf.Rad2Deg, -headMaxPitch, headMaxPitch);
 
-        if (dist <= noHeadLookDistance)
-        {
-            headPivot.localRotation = Quaternion.Slerp(
-                headPivot.localRotation,
-                headLocalDefaultRot,
-                Time.deltaTime * veryCloseHeadReturnSpeed
-            );
-            return;
-        }
-
-        Quaternion targetLocal = GetHeadLookRotation(from, to);
-
-        if (dist < minHeadLookDistance)
-        {
-            float t = Mathf.InverseLerp(noHeadLookDistance, minHeadLookDistance, dist);
-            targetLocal = Quaternion.Slerp(headLocalDefaultRot, targetLocal, t);
-        }
-
-        headPivot.localRotation = Quaternion.Slerp(
-            headPivot.localRotation,
-            targetLocal,
-            Time.deltaTime * headTurnSpeed
-        );
-    }
-
-    Quaternion GetHeadLookRotation(Vector3 from, Vector3 to)
-    {
-        Vector3 dir = (to - from).normalized;
-        Vector3 localDir = transform.InverseTransformDirection(dir);
-
-        float yaw = Mathf.Atan2(localDir.x, localDir.z) * Mathf.Rad2Deg;
-        float pitch = -Mathf.Asin(localDir.y) * Mathf.Rad2Deg;
-
-        yaw = Mathf.Clamp(yaw, -headMaxYaw, headMaxYaw);
-        pitch = Mathf.Clamp(pitch, -headMaxPitch, headMaxPitch);
-
-        return Quaternion.Euler(pitch, yaw, 0f);
+        Quaternion tgt = Quaternion.Euler(pitch, yaw, 0f);
+        if (dist < minHeadLookDistance) tgt = Quaternion.Slerp(headLocalDefaultRot, tgt, Mathf.InverseLerp(noHeadLookDistance, minHeadLookDistance, dist));
+        headPivot.localRotation = Quaternion.Slerp(headPivot.localRotation, tgt, Time.deltaTime * headTurnSpeed);
     }
 
     void ResetHeadToDefault()
     {
-        if (!headPivot) return;
-
-        headPivot.localRotation = Quaternion.Slerp(
-            headPivot.localRotation,
-            headLocalDefaultRot,
-            Time.deltaTime * headTurnSpeed
-        );
+        if (headPivot) headPivot.localRotation = Quaternion.Slerp(headPivot.localRotation, headLocalDefaultRot, Time.deltaTime * headTurnSpeed);
     }
 
     bool HasLineOfSightToPlayer()
     {
         Vector3 from = eyePoint ? eyePoint.position : (transform.position + Vector3.up * eyeHeight);
         Vector3 to = player.position + Vector3.up * 0.8f;
-        Vector3 dir = (to - from).normalized;
-        float dist = Vector3.Distance(from, to);
-
-        if (Physics.Raycast(from, dir, out RaycastHit hit, dist, obstacleMask))
+        if (Physics.Raycast(from, (to - from).normalized, out RaycastHit hit, Vector3.Distance(from, to), obstacleMask))
             return hit.transform == player || hit.transform.IsChildOf(player);
-
         return true;
-    }
-
-    void RestoreVisual(bool instant = false)
-    {
-        if (!visualRoot) return;
-
-        if (instant)
-        {
-            visualRoot.localPosition = visualDefaultPos;
-            visualRoot.localRotation = visualDefaultRot;
-            return;
-        }
-
-        visualRoot.localPosition = Vector3.Lerp(
-            visualRoot.localPosition,
-            visualDefaultPos,
-            Time.deltaTime * 6f
-        );
-
-        visualRoot.localRotation = Quaternion.Slerp(
-            visualRoot.localRotation,
-            visualDefaultRot,
-            Time.deltaTime * 6f
-        );
     }
 }
