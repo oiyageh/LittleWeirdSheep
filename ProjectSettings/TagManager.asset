@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Paintable
+  - PaintTool
   layers:
   - Default
   - TransparentFX
