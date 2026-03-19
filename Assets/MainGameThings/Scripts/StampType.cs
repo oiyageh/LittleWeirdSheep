@@ -2,8 +2,8 @@ using UnityEngine;
 
 public enum StampType
 {
-    Hostile,   // Red
-    Innocent,  // Green
+    Bad, // Red
+    Normal, // Green
     Unknown    // Blue
 }
 

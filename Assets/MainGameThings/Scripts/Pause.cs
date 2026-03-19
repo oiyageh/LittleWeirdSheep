@@ -40,6 +40,8 @@ public class PauseMenu : MonoBehaviour
             pauseMenuUI.SetActive(false); // Hide the pause menu UI
         }
         Time.timeScale = 1f; // Resume time
+        // Resume all audio
+        AudioListener.pause = false;
         GameIsPaused = false;
         //ensure the cursor is locked and hidden again
         Cursor.lockState = CursorLockMode.Locked;
@@ -54,6 +56,9 @@ public class PauseMenu : MonoBehaviour
             pauseMenuUI.SetActive(true); // Show the pause menu UI
         }
         Time.timeScale = 0f; // Stop time
+
+        //  Pause all audio
+        AudioListener.pause = true;
         GameIsPaused = true;
         
         Cursor.lockState = CursorLockMode.None;
@@ -64,6 +69,7 @@ public class PauseMenu : MonoBehaviour
     public void LoadMenu()
     {
         Time.timeScale = 1f; // Always resume time before loading a new scene
+        AudioListener.pause = false; // safety reset
         SceneManager.LoadScene("MainMenu");
     }
 
