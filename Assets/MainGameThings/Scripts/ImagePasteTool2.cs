@@ -6,14 +6,14 @@ public class ImagePasteTool2 : MonoBehaviour
     public GameObject decalPrefab;
     public float range = 50f;
 
-    public Color color1 = Color.red;   // First color (e.g., Hostile)
-    public Color color2 = Color.blue;  // Second color
-    public Color color3 = Color.green; // Third color
+    public Color color1 = Color.red;
+    public Color color2 = Color.blue;
+    public Color color3 = Color.green;
 
     public string allowedTag = "Paintable";
 
-    private bool useFirstColor = true;
-    private GameObject currentDecal; // Stores pasted decal
+    private int currentColorIndex = 0; // 0, 1, 2
+    private GameObject currentDecal;
 
     void Update()
     {
@@ -23,7 +23,7 @@ public class ImagePasteTool2 : MonoBehaviour
             Shoot();
         }
 
-        // Press C = swap color
+        // Press C = cycle colors
         if (Input.GetKeyDown(KeyCode.C))
         {
             SwapColor();
@@ -38,8 +38,23 @@ public class ImagePasteTool2 : MonoBehaviour
 
     void SwapColor()
     {
-        useFirstColor = !useFirstColor;
-        Debug.Log("Swapped Color!");
+        currentColorIndex++;
+
+        if (currentColorIndex > 2)
+            currentColorIndex = 0;
+
+        Debug.Log("Switched to color index: " + currentColorIndex);
+    }
+
+    Color GetCurrentColor()
+    {
+        switch (currentColorIndex)
+        {
+            case 0: return color1;
+            case 1: return color2;
+            case 2: return color3;
+            default: return color1;
+        }
     }
 
     void Shoot()
@@ -51,34 +66,25 @@ public class ImagePasteTool2 : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, range))
         {
-            // Only allow specific tag
             if (!hit.collider.CompareTag(allowedTag))
                 return;
 
-            // Create decal
             currentDecal = Instantiate(
                 decalPrefab,
                 hit.point + hit.normal * 0.01f,
                 Quaternion.LookRotation(hit.normal)
             );
 
-            // Attach to hit object
             currentDecal.transform.SetParent(hit.collider.transform);
 
-            // Set color
+            // Apply selected color
             Renderer r = currentDecal.GetComponent<Renderer>();
             if (r != null)
             {
-                if (useFirstColor)
-                    r.material.color = color1;
-                else
-                    r.material.color = color2;
+                r.material.color = GetCurrentColor();
             }
 
-            // -------------------------
-            // Save enemy to EnemyManager
-            // -------------------------
-            // Make sure the hit object has EnemyDataComponent
+            // Save enemy data
             SheepDataComponent enemyComp = hit.collider.GetComponent<SheepDataComponent>();
             if (enemyComp != null && enemyComp.enemyData != null)
             {
