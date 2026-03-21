@@ -20,6 +20,16 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("MainGame");
     }
 
+    public void MainMenu2()
+    {
+        SceneManager.LoadScene("MaiMenu");
+    }
+
+    public void HOWTO()
+    {
+        SceneManager.LoadScene("HowTo");
+    }
+
     public void Quit()
     {
         Debug.Log("QUIT!");

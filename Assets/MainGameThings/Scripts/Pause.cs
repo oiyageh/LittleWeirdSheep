@@ -35,6 +35,7 @@ public class PauseMenu : MonoBehaviour
     // Public function to resume the game
     public void Resume()
     {
+        Debug.Log("Resumed game");
         if (pauseMenuUI != null)
         {
             pauseMenuUI.SetActive(false); // Hide the pause menu UI
@@ -51,6 +52,7 @@ public class PauseMenu : MonoBehaviour
     // Public function to pause the game
     void Pause()
     {
+        Debug.Log("PAUSED GAME!");
         if (pauseMenuUI != null)
         {
             pauseMenuUI.SetActive(true); // Show the pause menu UI
@@ -71,6 +73,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f; // Always resume time before loading a new scene
         AudioListener.pause = false; // safety reset
         SceneManager.LoadScene("MainMenu");
+        Debug.Log("going to main menu");
     }
 
     // Example of a quit game function
