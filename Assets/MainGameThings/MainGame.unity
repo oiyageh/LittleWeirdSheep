@@ -390,8 +390,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 866352841}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &5979983 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 5979982}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9442277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -491,8 +499,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 108550237}
   m_SourcePrefab: {fileID: 100100000, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+--- !u!1 &9442278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+  m_PrefabInstance: {fileID: 9442277}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &11414218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,6 +1044,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 488141883}
     m_Modifications:
+    - target: {fileID: 601851049300969267, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2602195245505156253, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4980242
@@ -1083,6 +1103,10 @@ PrefabInstance:
     - target: {fileID: 3411206673648045607, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
       propertyPath: m_Name
       value: Wooden_Table_vl0jbem_Low (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411206673648045607, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2457,8 +2481,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 898978078}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &62686644 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 62686643}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &66940026
 GameObject:
   m_ObjectHideFlags: 0
@@ -3821,6 +3853,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2726528124992260261, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
   m_PrefabInstance: {fileID: 9442277}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &108550237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9442278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: "\u9646\u5317\u8FB0"
+  mustBeRed: 1
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1 &108674657
 GameObject:
   m_ObjectHideFlags: 0
@@ -5150,6 +5198,10 @@ PrefabInstance:
     - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6887,6 +6939,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7806,6 +7862,10 @@ PrefabInstance:
     - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9763,8 +9823,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 876761627}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &300559194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 300559193}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &300721002
 GameObject:
   m_ObjectHideFlags: 0
@@ -12753,8 +12821,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1850132107}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &385708576 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 385708575}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &388078552 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 08370ae33fad3da4a8357631f8a9f5ae, type: 3}
@@ -15109,6 +15185,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 488141883}
     m_Modifications:
+    - target: {fileID: 601851049300969267, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2602195245505156253, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4980243
@@ -15164,6 +15244,10 @@ PrefabInstance:
     - target: {fileID: 3411206673648045607, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
       propertyPath: m_Name
       value: Wooden_Table_vl0jbem_Low
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411206673648045607, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18466,6 +18550,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20479,6 +20567,10 @@ PrefabInstance:
     - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25990,8 +26082,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 750923577}
   m_SourcePrefab: {fileID: 100100000, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+--- !u!1 &750923576 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+  m_PrefabInstance: {fileID: 750923575}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &750923577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750923576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: Milly
+  mustBeRed: 1
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1 &750925726
 GameObject:
   m_ObjectHideFlags: 0
@@ -27815,8 +27931,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1291202869}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &795100425 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 795100424}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &796094621 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b3d80aad1767322488af8777deb5fd54, type: 3}
@@ -28323,6 +28447,10 @@ PrefabInstance:
     - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30276,6 +30404,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
   m_PrefabInstance: {fileID: 5979982}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &866352841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5979983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: Billy Bob
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1001 &868746386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30806,8 +30950,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1093111975}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &873918021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 873918020}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &874555514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30896,6 +31048,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
   m_PrefabInstance: {fileID: 300559193}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &876761627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300559194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: "\u54C8\u57FA\u7C73"
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1001 &876883123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31943,6 +32111,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
   m_PrefabInstance: {fileID: 62686643}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &898978078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62686644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: Tiny Tom
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1001 &902119311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33953,6 +34137,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 488141883}
     m_Modifications:
+    - target: {fileID: 601851049300969267, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2602195245505156253, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4980243
@@ -34008,6 +34196,10 @@ PrefabInstance:
     - target: {fileID: 3411206673648045607, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
       propertyPath: m_Name
       value: Wooden_Table_vl0jbem_Low (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411206673648045607, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35067,6 +35259,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35863,6 +36059,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36580,6 +36780,53 @@ Transform:
   - {fileID: 144567953}
   m_Father: {fileID: 459817141}
   m_LocalEulerAnglesHint: {x: 0, y: -186.549, z: 0}
+--- !u!1 &1035874889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1035874891}
+  - component: {fileID: 1035874890}
+  m_Layer: 0
+  m_Name: DecalStats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1035874890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035874889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90512211a662ccb4f89ba5bdbec0db38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DecalStats
+  redCount: 0
+  blueCount: 0
+  greenCount: 0
+--- !u!4 &1035874891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035874889}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.51355, y: -0.98, z: 151.63611}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1036938868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 08370ae33fad3da4a8357631f8a9f5ae, type: 3}
@@ -37980,8 +38227,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1381560352}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &1066756739 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 1066756738}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1072477752
 GameObject:
   m_ObjectHideFlags: 0
@@ -39316,6 +39571,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
   m_PrefabInstance: {fileID: 873918020}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1093111975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873918021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: Sigmun Flyod
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!4 &1096489922 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b3d80aad1767322488af8777deb5fd54, type: 3}
@@ -39645,7 +39916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1115226357
 Transform:
   m_ObjectHideFlags: 0
@@ -41430,6 +41701,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -41514,8 +41789,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1678295192}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &1163033234 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 1163033233}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1164155547 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b3d80aad1767322488af8777deb5fd54, type: 3}
@@ -42040,6 +42323,10 @@ PrefabInstance:
     - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -42585,6 +42872,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -42836,13 +43127,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187294249}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -43.35, y: -72.31, z: 137.47}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.420002, y: -0.16352081, z: 146.57}
   m_LocalScale: {x: 11.337, y: 6.411898, z: 6.346407}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 916812762}
-  m_Father: {fileID: 1398309235}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1187294251
 BoxCollider:
@@ -43621,8 +43912,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1217584204}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &1217584203 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 1217584202}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1217584204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217584203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: Bot
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1001 &1218640484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44437,6 +44752,10 @@ PrefabInstance:
     - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46350,6 +46669,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
   m_PrefabInstance: {fileID: 795100424}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1291202869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795100425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: Kevkev
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1001 &1295414398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47409,8 +47744,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1403781178}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &1322188254 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 1322188253}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1322994557
 GameObject:
   m_ObjectHideFlags: 0
@@ -48793,6 +49136,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
   m_PrefabInstance: {fileID: 1066756738}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1381560352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066756739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: "\u5149\u5934\u5F3A"
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1001 &1381758442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49456,6 +49815,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 488141883}
     m_Modifications:
+    - target: {fileID: 601851049300969267, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2602195245505156253, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4980243
@@ -49511,6 +49874,10 @@ PrefabInstance:
     - target: {fileID: 3411206673648045607, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
       propertyPath: m_Name
       value: Wooden_Table_vl0jbem_Low (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411206673648045607, guid: 1cfd3652347a918459d5f0937b65994f, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -49604,11 +49971,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d453557f2216545a7d741d48280e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
---- !u!4 &1398309235 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4101499184305048091, guid: 6522640885f29ff49a86a159ec4ef73e, type: 3}
-  m_PrefabInstance: {fileID: 2037789482}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1398309236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50003,6 +50365,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
   m_PrefabInstance: {fileID: 1322188253}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1403781178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322188254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: Ash Ketcum
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1 &1405628869
 GameObject:
   m_ObjectHideFlags: 0
@@ -50190,8 +50568,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1623547816}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &1407930587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 1407930586}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1410614822
 GameObject:
   m_ObjectHideFlags: 0
@@ -50404,6 +50790,10 @@ PrefabInstance:
     - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -50864,8 +51254,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2104750268}
   m_SourcePrefab: {fileID: 100100000, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+--- !u!1 &1426895266 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+  m_PrefabInstance: {fileID: 1426895265}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1427134555
 GameObject:
   m_ObjectHideFlags: 0
@@ -51041,6 +51439,10 @@ PrefabInstance:
     - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -52068,8 +52470,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1442804786}
   m_SourcePrefab: {fileID: 100100000, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+--- !u!1 &1442804785 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+  m_PrefabInstance: {fileID: 1442804784}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1442804786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442804785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: Achilles
+  mustBeRed: 1
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1001 &1443027438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57447,6 +57873,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -59004,6 +59434,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
   m_PrefabInstance: {fileID: 1407930586}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1623547816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407930587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: "\u6CB8\u7F8A\u7F8A"
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1 &1624766082
 GameObject:
   m_ObjectHideFlags: 0
@@ -59356,8 +59802,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1726816806}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &1639684724 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 1639684723}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1640103136 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b3d80aad1767322488af8777deb5fd54, type: 3}
@@ -61320,6 +61774,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
   m_PrefabInstance: {fileID: 1163033233}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1678295192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163033234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: GG Bond
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1 &1680920375
 GameObject:
   m_ObjectHideFlags: 0
@@ -64034,6 +64504,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
   m_PrefabInstance: {fileID: 1639684723}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1726816806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639684724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: "\u718A\u4E8C"
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1 &1729286163
 GameObject:
   m_ObjectHideFlags: 0
@@ -67640,8 +68126,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1819987699}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &1819987698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 1819987697}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1819987699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819987698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: "\u718A\u5927"
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1 &1824288787
 GameObject:
   m_ObjectHideFlags: 0
@@ -68304,6 +68814,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4728466500326825811, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
   m_PrefabInstance: {fileID: 385708575}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1850132107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385708576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: Philly
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1 &1850949739
 GameObject:
   m_ObjectHideFlags: 0
@@ -69558,6 +70084,10 @@ PrefabInstance:
     - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -74971,8 +75501,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2023605673}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &2023605672 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 2023605671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2023605673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023605672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: Nosferatu
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1 &2025043068
 GameObject:
   m_ObjectHideFlags: 0
@@ -75693,10 +76247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4101499184305048091, guid: 6522640885f29ff49a86a159ec4ef73e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1187294250}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2325080128971143941, guid: 6522640885f29ff49a86a159ec4ef73e, type: 3}
       insertIndex: -1
@@ -76189,6 +76740,10 @@ PrefabInstance:
     - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -76724,8 +77279,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2058518460}
   m_SourcePrefab: {fileID: 100100000, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+--- !u!1 &2058518459 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5519406108466369009, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
+  m_PrefabInstance: {fileID: 2058518458}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2058518460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058518459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: "\u67F3\u5982\u70DF"
+  mustBeRed: 1
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1 &2059975611
 GameObject:
   m_ObjectHideFlags: 0
@@ -77705,6 +78284,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Round_Hay_Bale_rlCay_Low (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 2968798935098941011, guid: 9db789b7d23617544b73a5ff90f9ab48, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -78577,6 +79160,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2726528124992260261, guid: 8622dbb0c8d21ab4fb3c44787768105c, type: 3}
   m_PrefabInstance: {fileID: 1426895265}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2104750268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426895266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: Muhammad
+  mustBeRed: 1
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!4 &2105217306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0ddb82da3485fac4dbfe187acb70a610, type: 3}
@@ -79909,8 +80508,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2137341644}
   m_SourcePrefab: {fileID: 100100000, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+--- !u!1 &2137341643 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6175672159091604653, guid: 610c96986e6192f4084ffbf73ffe40e6, type: 3}
+  m_PrefabInstance: {fileID: 2137341642}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2137341644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137341643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sheep
+  sheepName: "\u559C\u7F8A\u7F8A"
+  mustBeRed: 0
+  isCorrect: 0
+  currentColorIndex: -1
 --- !u!1 &2138528169
 GameObject:
   m_ObjectHideFlags: 0
@@ -80397,6 +81020,7 @@ SceneRoots:
   - {fileID: 1654491162}
   - {fileID: 979217175}
   - {fileID: 1641854631}
+  - {fileID: 1187294250}
   - {fileID: 2037789482}
   - {fileID: 810039626}
   - {fileID: 1173011594}
@@ -80412,3 +81036,4 @@ SceneRoots:
   - {fileID: 168057695}
   - {fileID: 1729286164}
   - {fileID: 488141883}
+  - {fileID: 1035874891}

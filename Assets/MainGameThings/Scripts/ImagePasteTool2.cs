@@ -15,8 +15,8 @@ public class ImagePasteTool2 : MonoBehaviour
 
     private int currentColorIndex = 0;
 
-    // 🔥 Track which object has which decal
-    private Dictionary<GameObject, GameObject> objectToDecal = new Dictionary<GameObject, GameObject>();
+    private Dictionary<GameObject, (GameObject decal, int colorIndex)> objectToDecal
+     = new Dictionary<GameObject, (GameObject, int)>();
 
     void Update()
     {
@@ -59,59 +59,61 @@ public class ImagePasteTool2 : MonoBehaviour
     void Shoot()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         if (Physics.Raycast(ray, out RaycastHit hit, range))
         {
-            if (!hit.collider.CompareTag(allowedTag))
-                return;
-
+            if (!hit.collider.CompareTag(allowedTag)) return;
             GameObject targetObject = hit.collider.gameObject;
 
-            // ❌ Already has a stamp → stop
+            // Remove old decal if it exists
             if (objectToDecal.ContainsKey(targetObject))
             {
-                Debug.Log("This object already has a stamp!");
-                return;
+                var oldData = objectToDecal[targetObject];
+                DecalStats.Instance.RemoveColor(oldData.colorIndex);
+                Destroy(oldData.decal);
+                objectToDecal.Remove(targetObject);
             }
 
+            // Place new decal
             GameObject newDecal = Instantiate(
                 decalPrefab,
                 hit.point + hit.normal * 0.01f,
                 Quaternion.LookRotation(hit.normal)
             );
-
             newDecal.transform.SetParent(targetObject.transform);
 
             Renderer r = newDecal.GetComponent<Renderer>();
-            if (r != null)
-            {
-                r.material.color = GetCurrentColor();
-            }
+            if (r != null) r.material.color = GetCurrentColor();
 
-            //  Save mapping
-            objectToDecal.Add(targetObject, newDecal);
+            objectToDecal.Add(targetObject, (newDecal, currentColorIndex));
+            DecalStats.Instance.AddColor(currentColorIndex);
 
-        
+            // Update sheep
+            Sheep sheep = targetObject.GetComponent<Sheep>();
+            if (sheep != null) sheep.SetColor(currentColorIndex);
         }
     }
 
     void RemoveLookedAtDecal()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         if (Physics.Raycast(ray, out RaycastHit hit, range))
         {
-            GameObject hitObject = hit.collider.gameObject;
-
-            // Loop through dictionary to find matching decal
             GameObject objectToRemove = null;
 
             foreach (var pair in objectToDecal)
             {
-                if (pair.Value == hitObject)
+                if (pair.Value.decal == hit.collider.gameObject)
                 {
                     objectToRemove = pair.Key;
-                    Destroy(pair.Value);
+
+                    // Update color counts
+                    DecalStats.Instance.RemoveColor(pair.Value.colorIndex);
+
+                    // Update sheep
+                    Sheep sheep = objectToRemove.GetComponent<Sheep>();
+                    if (sheep != null) sheep.RemoveColor();
+
+                    Destroy(pair.Value.decal);
                     break;
                 }
             }
@@ -119,7 +121,6 @@ public class ImagePasteTool2 : MonoBehaviour
             if (objectToRemove != null)
             {
                 objectToDecal.Remove(objectToRemove);
-                Debug.Log("Removed looked-at decal");
             }
         }
     }
