@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/MainGameThings/NightScene.unity
+    path: Assets/MainGameThings/EndOfDay.unity
     guid: 67f607108b0cfda4bbfa88d21703c26b
   - enabled: 1
     path: Assets/MainGameThings/HowTo.unity
