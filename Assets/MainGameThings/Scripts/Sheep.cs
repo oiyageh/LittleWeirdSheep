@@ -1,15 +1,16 @@
 using UnityEngine;
 
+[System.Serializable]
+public class SheepData
+{
+    public string sheepName;    // Name shown in summary
+    public bool mustBeRed;      // Required to be red
+}
+
 public class Sheep : MonoBehaviour
 {
     [Header("Sheep Info")]
-    public string sheepName;        // Set the sheep’s name in Inspector
-
-    [Header("Requirement")]
-    public bool mustBeRed;          // Check this if this sheep must be red to “win”
-
-    [HideInInspector]
-    public bool isCorrect = false;  // Tracks if this sheep has correct color
+    public SheepData data;       // Set in Inspector
 
     [HideInInspector]
     public int currentColorIndex = -1; // -1 = no decal
@@ -29,15 +30,11 @@ public class Sheep : MonoBehaviour
     public void SetColor(int colorIndex)
     {
         currentColorIndex = colorIndex;
-
-        // Correct only if it must be red AND is painted red
-        isCorrect = (mustBeRed && colorIndex == 0);
     }
 
     public void RemoveColor()
     {
         currentColorIndex = -1;
-        isCorrect = false;
     }
 
     public string GetColorName()
@@ -49,5 +46,15 @@ public class Sheep : MonoBehaviour
             case 2: return "Green";
             default: return "None";
         }
+    }
+
+    public string GetSheepName()
+    {
+        return data.sheepName;
+    }
+
+    public bool MustBeRed()
+    {
+        return data.mustBeRed;
     }
 }

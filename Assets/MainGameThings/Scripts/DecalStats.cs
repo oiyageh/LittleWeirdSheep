@@ -1,13 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class DecalStats : MonoBehaviour
 {
     public static DecalStats Instance;
-
-    public int redCount;
-    public int blueCount;
-    public int greenCount;
 
     private List<Sheep> allSheep = new List<Sheep>();
 
@@ -18,28 +15,9 @@ public class DecalStats : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        else Destroy(gameObject);
     }
 
-    // Color counting for UI
-    public void AddColor(int index)
-    {
-        if (index == 0) redCount++;
-        else if (index == 1) blueCount++;
-        else if (index == 2) greenCount++;
-    }
-
-    public void RemoveColor(int index)
-    {
-        if (index == 0) redCount--;
-        else if (index == 1) blueCount--;
-        else if (index == 2) greenCount--;
-    }
-
-    // Sheep registration
     public void RegisterSheep(Sheep sheep)
     {
         if (!allSheep.Contains(sheep))
@@ -52,23 +30,29 @@ public class DecalStats : MonoBehaviour
             allSheep.Remove(sheep);
     }
 
-    // Win check: all required sheep must be red
-    public bool AllCorrectSheepAreRed()
+    public List<Sheep> GetAllSheep() => allSheep;
+
+    public bool CheckWinCondition()
     {
         foreach (Sheep sheep in allSheep)
         {
             if (sheep == null) continue;
 
-            if (sheep.mustBeRed && !sheep.isCorrect) return false;
-            if (!sheep.mustBeRed && sheep.isCorrect) return false;
-        }
+            // Required sheep must be red
+            if (sheep.MustBeRed() && sheep.currentColorIndex != 0)
+                return false;
 
+            // Optional sheep must be green
+            if (!sheep.MustBeRed() && sheep.currentColorIndex != 2)
+                return false;
+        }
         return true;
     }
 
-    // Get all sheep for UI
-    public List<Sheep> GetAllSheep()
+    // Call to evaluate and go to the correct scene
+    public void EvaluateWinLose(string winScene, string loseScene)
     {
-        return allSheep;
+        if (CheckWinCondition()) SceneManager.LoadScene(winScene);
+        else SceneManager.LoadScene(loseScene);
     }
 }

@@ -3865,9 +3865,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: "\u9646\u5317\u8FB0"
-  mustBeRed: 1
-  isCorrect: 0
+  data:
+    sheepName: Sigmun Flyod
+    mustBeRed: 1
   currentColorIndex: -1
 --- !u!1 &108674657
 GameObject:
@@ -26104,9 +26104,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: Milly
-  mustBeRed: 1
-  isCorrect: 0
+  data:
+    sheepName: Achilles
+    mustBeRed: 1
   currentColorIndex: -1
 --- !u!1 &750925726
 GameObject:
@@ -30416,9 +30416,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: Billy Bob
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: Kevkev
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1001 &868746386
 PrefabInstance:
@@ -31060,9 +31060,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: "\u54C8\u57FA\u7C73"
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: "\u718A\u4E8C"
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1001 &876883123
 PrefabInstance:
@@ -32123,9 +32123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: Tiny Tom
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: Philly
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1001 &902119311
 PrefabInstance:
@@ -36809,9 +36809,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90512211a662ccb4f89ba5bdbec0db38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DecalStats
-  redCount: 0
-  blueCount: 0
-  greenCount: 0
 --- !u!4 &1035874891
 Transform:
   m_ObjectHideFlags: 0
@@ -39583,9 +39580,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: Sigmun Flyod
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: Ash Ketcum
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!4 &1096489922 stripped
 Transform:
@@ -39916,7 +39913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1115226357
 Transform:
   m_ObjectHideFlags: 0
@@ -43934,9 +43931,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: Bot
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: "\u718A\u5927"
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1001 &1218640484
 PrefabInstance:
@@ -46681,9 +46678,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: Kevkev
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: "\u54C8\u57FA\u7C73"
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1001 &1295414398
 PrefabInstance:
@@ -49148,9 +49145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: "\u5149\u5934\u5F3A"
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: GG Bond
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1001 &1381758442
 PrefabInstance:
@@ -50377,9 +50374,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: Ash Ketcum
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: Billy Bob
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1 &1405628869
 GameObject:
@@ -52492,9 +52489,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: Achilles
-  mustBeRed: 1
-  isCorrect: 0
+  data:
+    sheepName: "\u67F3\u5982\u70DF"
+    mustBeRed: 1
   currentColorIndex: -1
 --- !u!1001 &1443027438
 PrefabInstance:
@@ -59446,9 +59443,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: "\u6CB8\u7F8A\u7F8A"
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: Muhammad
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1 &1624766082
 GameObject:
@@ -61786,9 +61783,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: GG Bond
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: Milly
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1 &1680920375
 GameObject:
@@ -64516,9 +64513,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: "\u718A\u4E8C"
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: "\u559C\u7F8A\u7F8A"
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1 &1729286163
 GameObject:
@@ -68148,9 +68145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: "\u718A\u5927"
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: "\u5149\u5934\u5F3A"
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1 &1824288787
 GameObject:
@@ -68826,9 +68823,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: Philly
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: Bot
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1 &1850949739
 GameObject:
@@ -75523,9 +75520,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: Nosferatu
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: Tiny Tom
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1 &2025043068
 GameObject:
@@ -77301,9 +77298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: "\u67F3\u5982\u70DF"
-  mustBeRed: 1
-  isCorrect: 0
+  data:
+    sheepName: Nosferatu
+    mustBeRed: 1
   currentColorIndex: -1
 --- !u!1 &2059975611
 GameObject:
@@ -79172,9 +79169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: Muhammad
-  mustBeRed: 1
-  isCorrect: 0
+  data:
+    sheepName: "\u9646\u5317\u8FB0"
+    mustBeRed: 1
   currentColorIndex: -1
 --- !u!4 &2105217306 stripped
 Transform:
@@ -80530,9 +80527,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3409dbe5920e5be458f1cd25c3581b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
-  sheepName: "\u559C\u7F8A\u7F8A"
-  mustBeRed: 0
-  isCorrect: 0
+  data:
+    sheepName: "\u6CB8\u7F8A\u7F8A"
+    mustBeRed: 0
   currentColorIndex: -1
 --- !u!1 &2138528169
 GameObject:
