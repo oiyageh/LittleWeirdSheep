@@ -31061,7 +31061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
   data:
-    sheepName: "\u718A\u4E8C"
+    sheepName: Terry Aki
     mustBeRed: 0
   currentColorIndex: -1
 --- !u!1001 &876883123
@@ -43932,7 +43932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
   data:
-    sheepName: "\u718A\u5927"
+    sheepName: Loot McScoot
     mustBeRed: 0
   currentColorIndex: -1
 --- !u!1001 &1218640484
@@ -46679,7 +46679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
   data:
-    sheepName: "\u54C8\u57FA\u7C73"
+    sheepName: Pixel McFrag
     mustBeRed: 0
   currentColorIndex: -1
 --- !u!1001 &1295414398
@@ -52490,7 +52490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
   data:
-    sheepName: "\u67F3\u5982\u70DF"
+    sheepName: "Baa-rack O\u2019Lamb-a"
     mustBeRed: 1
   currentColorIndex: -1
 --- !u!1001 &1443027438
@@ -64514,7 +64514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
   data:
-    sheepName: "\u559C\u7F8A\u7F8A"
+    sheepName: Kanito Max Win
     mustBeRed: 0
   currentColorIndex: -1
 --- !u!1 &1729286163
@@ -68146,7 +68146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
   data:
-    sheepName: "\u5149\u5934\u5F3A"
+    sheepName: Chris P. Bacon
     mustBeRed: 0
   currentColorIndex: -1
 --- !u!1 &1824288787
@@ -68824,7 +68824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
   data:
-    sheepName: Bot
+    sheepName: Ctrl Alt Delilah
     mustBeRed: 0
   currentColorIndex: -1
 --- !u!1 &1850949739
@@ -79170,7 +79170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
   data:
-    sheepName: "\u9646\u5317\u8FB0"
+    sheepName: Lamb Choplin
     mustBeRed: 1
   currentColorIndex: -1
 --- !u!4 &2105217306 stripped
@@ -80528,7 +80528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sheep
   data:
-    sheepName: "\u6CB8\u7F8A\u7F8A"
+    sheepName: Ben Dover
     mustBeRed: 0
   currentColorIndex: -1
 --- !u!1 &2138528169

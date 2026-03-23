@@ -71,8 +71,11 @@ public class ImagePasteTool2 : MonoBehaviour
         objectToDecal.Add(targetObject, (newDecal, currentColorIndex));
 
         // Update sheep if it exists
-        Sheep sheep = targetObject.GetComponent<Sheep>();
-        if (sheep != null) sheep.SetColor(currentColorIndex);
+        Sheep sheep = targetObject.GetComponentInParent<Sheep>();
+        if (sheep != null)
+        {
+            sheep.SetColor(currentColorIndex);
+        }
     }
 
     void RemoveDecalAtAim()
@@ -94,8 +97,11 @@ public class ImagePasteTool2 : MonoBehaviour
                 Debug.Log("Decal removed at aim!");
 
                 // Remove color from Sheep
-                Sheep sheep = targetObject.GetComponent<Sheep>();
-                if (sheep != null) sheep.SetColor(-1); // -1 = no color
+                Sheep sheep = targetObject.GetComponentInParent<Sheep>();
+                if (sheep != null)
+                {
+                    sheep.SetColor(-1);
+                }
             }
             else
             {

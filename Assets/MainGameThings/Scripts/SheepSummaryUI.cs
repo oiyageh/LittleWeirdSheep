@@ -21,21 +21,21 @@ public class SheepSummaryUI : MonoBehaviour
         StringBuilder sb = new StringBuilder();
         sb.AppendLine("<b>Sheep Summary:</b>\n");
 
-        foreach (Sheep sheep in DecalStats.Instance.GetAllSheep())
+        foreach (var sheep in DecalStats.Instance.GetAllSheep())
         {
-            if (sheep == null) continue;
-
-            string colorName = sheep.GetColorName();
-            string coloredText = colorName switch
+            string colorName = sheep.colorIndex switch
             {
-                "Red" => "<color=red>Red</color>",
-                "Blue" => "<color=blue>Blue</color>",
-                "Green" => "<color=green>Green</color>",
-                _ => "<color=grey>None</color>" // unpainted sheep
+                0 => "<color=red>Red</color>",
+                1 => "<color=blue>Blue</color>",
+                2 => "<color=green>Green</color>",
+                _ => "<color=grey>None</color>"
             };
 
-            string displayName = sheep.MustBeRed() ? $"<b>{sheep.GetSheepName()}</b>" : sheep.GetSheepName();
-            sb.AppendLine($"{displayName} → {coloredText}");
+            string displayName = sheep.mustBeRed
+                ? $"<b>{sheep.sheepName}</b>"
+                : sheep.sheepName;
+
+            sb.AppendLine($"{displayName} → {colorName}");
         }
 
         summaryText.text = sb.ToString();
@@ -50,26 +50,16 @@ public class SheepSummaryUI : MonoBehaviour
             return;
         }
 
-        foreach (Sheep sheep in DecalStats.Instance.GetAllSheep())
-        {
-            if (sheep == null) continue;
+        foreach(var sheep in DecalStats.Instance.GetAllSheep())
+{
+            bool isCorrect =
+                (sheep.mustBeRed && sheep.colorIndex == 0) ||
+                (!sheep.mustBeRed && sheep.colorIndex == 2);
 
-            // Check required red sheep
-            if (sheep.MustBeRed())
+            if (!isCorrect)
             {
-                if (sheep.currentColorIndex != 0) // not red or unpainted
-                {
-                    SceneManager.LoadScene(loseSceneName);
-                    return;
-                }
-            }
-            else // optional sheep must be green
-            {
-                if (sheep.currentColorIndex != 2) // not green or unpainted
-                {
-                    SceneManager.LoadScene(loseSceneName);
-                    return;
-                }
+                SceneManager.LoadScene(loseSceneName);
+                return;
             }
         }
 

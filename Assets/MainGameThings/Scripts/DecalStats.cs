@@ -2,11 +2,19 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public class SheepRuntimeData
+{
+    public string sheepName;
+    public bool mustBeRed;
+    public int colorIndex;
+}
+
 public class DecalStats : MonoBehaviour
 {
     public static DecalStats Instance;
 
-    private List<Sheep> allSheep = new List<Sheep>();
+    private List<SheepRuntimeData> allSheepData = new List<SheepRuntimeData>();
 
     void Awake()
     {
@@ -20,36 +28,43 @@ public class DecalStats : MonoBehaviour
 
     public void RegisterSheep(Sheep sheep)
     {
-        if (!allSheep.Contains(sheep))
-            allSheep.Add(sheep);
+        SheepRuntimeData data = new SheepRuntimeData
+        {
+            sheepName = sheep.GetSheepName(),
+            mustBeRed = sheep.MustBeRed(),
+            colorIndex = sheep.currentColorIndex
+        };
+
+        allSheepData.Add(data);
     }
 
-    public void UnregisterSheep(Sheep sheep)
+    public void UpdateSheepColor(Sheep sheep, int colorIndex)
     {
-        if (allSheep.Contains(sheep))
-            allSheep.Remove(sheep);
+        foreach (var s in allSheepData)
+        {
+            if (s.sheepName == sheep.GetSheepName())
+            {
+                s.colorIndex = colorIndex;
+                return;
+            }
+        }
     }
 
-    public List<Sheep> GetAllSheep() => allSheep;
+    public List<SheepRuntimeData> GetAllSheep() => allSheepData;
 
     public bool CheckWinCondition()
     {
-        foreach (Sheep sheep in allSheep)
+        foreach (var sheep in allSheepData)
         {
-            if (sheep == null) continue;
-
-            // Required sheep must be red
-            if (sheep.MustBeRed() && sheep.currentColorIndex != 0)
+            if (sheep.mustBeRed && sheep.colorIndex != 0)
                 return false;
 
-            // Optional sheep must be green
-            if (!sheep.MustBeRed() && sheep.currentColorIndex != 2)
+            if (!sheep.mustBeRed && sheep.colorIndex != 2)
                 return false;
         }
         return true;
     }
 
-    // Call to evaluate and go to the correct scene
     public void EvaluateWinLose(string winScene, string loseScene)
     {
         if (CheckWinCondition()) SceneManager.LoadScene(winScene);
