@@ -28,6 +28,12 @@ public class DecalStats : MonoBehaviour
 
     public void RegisterSheep(Sheep sheep)
     {
+        foreach (var s in allSheepData)
+        {
+            if (s.sheepName == sheep.GetSheepName())
+                return; // already registered
+        }
+
         SheepRuntimeData data = new SheepRuntimeData
         {
             sheepName = sheep.GetSheepName(),
@@ -70,4 +76,11 @@ public class DecalStats : MonoBehaviour
         if (CheckWinCondition()) SceneManager.LoadScene(winScene);
         else SceneManager.LoadScene(loseScene);
     }
+
+    public void ResetStats()
+    {
+        allSheepData.Clear();
+    }
+
+
 }
