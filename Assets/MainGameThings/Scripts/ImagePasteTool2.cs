@@ -12,6 +12,8 @@ public class ImagePasteTool2 : MonoBehaviour
     public string allowedTag = "Paintable";
 
     private int currentColorIndex = 0;
+
+    // Tracks decals per object
     private Dictionary<GameObject, (GameObject decal, int colorIndex)> objectToDecal
         = new Dictionary<GameObject, (GameObject, int)>();
 
@@ -19,6 +21,7 @@ public class ImagePasteTool2 : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) Shoot();
         if (Input.GetKeyDown(KeyCode.C)) SwapColor();
+        if (Input.GetKeyDown(KeyCode.R)) RemoveDecalAtAim();
     }
 
     void SwapColor()
@@ -30,13 +33,13 @@ public class ImagePasteTool2 : MonoBehaviour
 
     Color GetCurrentColor()
     {
-        switch (currentColorIndex)
+        return currentColorIndex switch
         {
-            case 0: return color1;
-            case 1: return color2;
-            case 2: return color3;
-            default: return color1;
-        }
+            0 => color1,
+            1 => color2,
+            2 => color3,
+            _ => color1
+        };
     }
 
     void Shoot()
@@ -70,5 +73,38 @@ public class ImagePasteTool2 : MonoBehaviour
         // Update sheep if it exists
         Sheep sheep = targetObject.GetComponent<Sheep>();
         if (sheep != null) sheep.SetColor(currentColorIndex);
+    }
+
+    void RemoveDecalAtAim()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (!Physics.Raycast(ray, out RaycastHit hit, range)) return;
+        if (!hit.collider.CompareTag(allowedTag)) return;
+
+        GameObject targetObject = hit.collider.gameObject;
+
+        // Only remove decal if the hit object has one
+        if (objectToDecal.TryGetValue(targetObject, out var decalData))
+        {
+            // Optional: ensure the hit point is close to the decal
+            if (Vector3.Distance(hit.point, decalData.decal.transform.position) < 0.5f)
+            {
+                Destroy(decalData.decal);
+                objectToDecal.Remove(targetObject);
+                Debug.Log("Decal removed at aim!");
+
+                // Remove color from Sheep
+                Sheep sheep = targetObject.GetComponent<Sheep>();
+                if (sheep != null) sheep.SetColor(-1); // -1 = no color
+            }
+            else
+            {
+                Debug.Log("Not aiming at the decal directly.");
+            }
+        }
+        else
+        {
+            Debug.Log("No decal to remove at this object.");
+        }
     }
 }

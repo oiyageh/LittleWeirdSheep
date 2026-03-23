@@ -3,7 +3,6 @@ using UnityEngine;
 public class SceneTrigger : MonoBehaviour
 {
     public GameObject promptUI; // Assign your UI panel here
-
     private bool playerInZone = false;
 
     void Start()

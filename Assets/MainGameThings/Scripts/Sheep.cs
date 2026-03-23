@@ -3,17 +3,16 @@ using UnityEngine;
 [System.Serializable]
 public class SheepData
 {
-    public string sheepName;    // Name shown in summary
-    public bool mustBeRed;      // Required to be red
+    public string sheepName;   // <-- THIS must be filled in Inspector
+    public bool mustBeRed;     // Required red sheep
 }
 
 public class Sheep : MonoBehaviour
 {
-    [Header("Sheep Info")]
-    public SheepData data;       // Set in Inspector
+    public SheepData data;         // Assign in Inspector
 
     [HideInInspector]
-    public int currentColorIndex = -1; // -1 = no decal
+    public int currentColorIndex = -1; // -1 = not painted
 
     void OnEnable()
     {
@@ -32,29 +31,27 @@ public class Sheep : MonoBehaviour
         currentColorIndex = colorIndex;
     }
 
-    public void RemoveColor()
-    {
-        currentColorIndex = -1;
-    }
-
     public string GetColorName()
     {
-        switch (currentColorIndex)
+        return currentColorIndex switch
         {
-            case 0: return "Red";
-            case 1: return "Blue";
-            case 2: return "Green";
-            default: return "None";
-        }
+            0 => "Red",
+            1 => "Blue",
+            2 => "Green",
+            _ => "None"
+        };
     }
 
     public string GetSheepName()
     {
-        return data.sheepName;
+        if (data != null && !string.IsNullOrEmpty(data.sheepName))
+            return data.sheepName;
+        else
+            return gameObject.name;  // fallback if data not set
     }
 
     public bool MustBeRed()
     {
-        return data.mustBeRed;
+        return data != null && data.mustBeRed;
     }
 }

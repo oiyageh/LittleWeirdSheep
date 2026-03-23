@@ -31,7 +31,7 @@ public class SheepSummaryUI : MonoBehaviour
                 "Red" => "<color=red>Red</color>",
                 "Blue" => "<color=blue>Blue</color>",
                 "Green" => "<color=green>Green</color>",
-                _ => "None"
+                _ => "<color=grey>None</color>" // unpainted sheep
             };
 
             string displayName = sheep.MustBeRed() ? $"<b>{sheep.GetSheepName()}</b>" : sheep.GetSheepName();
@@ -41,29 +41,39 @@ public class SheepSummaryUI : MonoBehaviour
         summaryText.text = sb.ToString();
     }
 
-    // Call this with a button click
+    // Call this on Button Click
     public void OnCheckWinLose()
     {
-        if (DecalStats.Instance == null) return;
-
-        bool allCorrect = true;
+        if (DecalStats.Instance == null)
+        {
+            Debug.LogError("DecalStats instance not found!");
+            return;
+        }
 
         foreach (Sheep sheep in DecalStats.Instance.GetAllSheep())
         {
             if (sheep == null) continue;
 
-            // Required sheep must be red
-            if (sheep.MustBeRed() && sheep.currentColorIndex != 0)
-                allCorrect = false;
-
-            // Optional sheep must be green
-            if (!sheep.MustBeRed() && sheep.currentColorIndex != 2)
-                allCorrect = false;
+            // Check required red sheep
+            if (sheep.MustBeRed())
+            {
+                if (sheep.currentColorIndex != 0) // not red or unpainted
+                {
+                    SceneManager.LoadScene(loseSceneName);
+                    return;
+                }
+            }
+            else // optional sheep must be green
+            {
+                if (sheep.currentColorIndex != 2) // not green or unpainted
+                {
+                    SceneManager.LoadScene(loseSceneName);
+                    return;
+                }
+            }
         }
 
-        if (allCorrect)
-            SceneManager.LoadScene(winSceneName);
-        else
-            SceneManager.LoadScene(loseSceneName);
+        // If all checks passed
+        SceneManager.LoadScene(winSceneName);
     }
 }
