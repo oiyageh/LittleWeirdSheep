@@ -20,6 +20,16 @@ public class TriggerObject : MonoBehaviour
         mainCollider = GetComponent<Collider>();
     }
 
+    void Start()
+    {
+        // Ensure the object falls to the ground when first spawned
+        if (rb != null && !isHeld)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+        }
+    }
+
     public void PickUp(Transform holdPoint)
     {
         if (hasBeenPlaced) return;
@@ -53,6 +63,7 @@ public class TriggerObject : MonoBehaviour
 
         transform.SetParent(null);
 
+        // We set to kinematic here so it stays exactly where you put it
         if (rb != null)
         {
             rb.isKinematic = true;
@@ -75,10 +86,11 @@ public class TriggerObject : MonoBehaviour
 
         foreach (Collider hit in hits)
         {
-            BadSheepAI badSheep = hit.GetComponentInParent<BadSheepAI>();
+            // Assuming BadSheepAI script exists on the targets
+            var badSheep = hit.GetComponentInParent<MonoBehaviour>();
             if (badSheep != null)
             {
-                badSheep.TriggerBadSheep();
+                badSheep.Invoke("TriggerBadSheep", 0);
             }
         }
     }

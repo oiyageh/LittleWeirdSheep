@@ -4,10 +4,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
-    public float walkSpeed = 5f; //how fast they walk
-    public float runSpeed = 10f; // how fast they run
-    public float jumpPower = 7f;  //jump height
-    public float gravity = -15f; // Stadard gravity
+    private SimplePlayerStun stunComponent; // Reference to the stun script
+
+    public float walkSpeed = 5f;
+    public float runSpeed = 10f;
+    public float jumpPower = 7f;
+    public float gravity = -15f;
     private Vector3 velocity;
     private float speed;
 
@@ -15,39 +17,49 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         speed = walkSpeed;
+
+        // Automatically find the stun script on the same object
+        stunComponent = GetComponent<SimplePlayerStun>();
     }
 
     void Update()
     {
-        // Handle the Movement
+        // 1. STUN CHECK: If stunned, stop horizontal movement and skip input
+        if (stunComponent != null && stunComponent.isStunned)
+        {
+            // Zero out movement velocity so they don't slide
+            velocity.x = 0;
+            velocity.z = 0;
+
+            // Still apply gravity so they fall if stunned in mid-air
+            if (!controller.isGrounded)
+            {
+                velocity.y += gravity * Time.deltaTime;
+                controller.Move(velocity * Time.deltaTime);
+            }
+
+            return; // EXIT early so the player cannot move or jump
+        }
+
+        // --- NORMAL MOVEMENT LOGIC ---
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        // Use transform.right and transform.forward to move relative to player's rotation
         Vector3 moveDirection = transform.right * horizontalInput + transform.forward * verticalInput;
-
-        // Apply movement
         controller.Move(moveDirection * speed * Time.deltaTime);
 
-        // Handle Gravity and Jumping
         if (controller.isGrounded)
         {
-            // Reset vertical velocity when on the ground
             velocity.y = -2f;
-
             if (Input.GetButtonDown("Jump"))
             {
                 velocity.y = Mathf.Sqrt(jumpPower * -2f * gravity);
             }
         }
 
-        // Apply gravity
         velocity.y += gravity * Time.deltaTime;
-
-        // Apply vertical movement (jumping/falling)
         controller.Move(velocity * Time.deltaTime);
 
-        // player can sprint 
         if (Input.GetKeyDown(KeyCode.LeftShift))
             speed = runSpeed;
         if (Input.GetKeyUp(KeyCode.LeftShift))
